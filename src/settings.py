@@ -12,7 +12,7 @@ class _Settings():
   if an Owner was not defined.
   """
 
-  EMAIL_BASE_CLEAN_REGEX: str = '(sys)?\.(com|it)$'
+  EMAIL_BASE_CLEAN_REGEX: str = r'(sys)?\.(com|it)$'
   """
   At Patagonian we have domains "@patagoniansys.com", "@patagonian.it" and "@patagonian.com".
   To check if a user is already on the permissions list, we need to examine

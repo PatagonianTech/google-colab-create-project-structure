@@ -244,6 +244,11 @@ def list_folder(folder_id: str):
     folder_id: Google Drive folder ID
 
   Returns: Folder content array
+  
+  Return example:
+  ```json
+  [{'id': '1YH2VZXPuxxxRSRyKt', 'name': '001. Folder name'}]
+  ```
   """
   files = []
   page_token = None
