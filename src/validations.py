@@ -1,12 +1,14 @@
 from src.logs import *
 from src.settings import SETTINGS
 
-log_title('Validations')
 
 def validate_non_empty(
     name: str,
     x: str
   ):
+  """
+  Validate that the given string is not empty.
+  """
   x = x.strip()
 
   if not x:
@@ -20,6 +22,9 @@ def validate_email(
     s: str,
     required: bool = True
   ):
+  """
+  Validate that the given string is a valid email for `SETTINGS.BASE_DOMAIN`.
+  """
   s = s.strip()
 
   if required and not s:

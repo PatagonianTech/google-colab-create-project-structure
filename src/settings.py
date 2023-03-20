@@ -1,20 +1,21 @@
 class _Settings():
   BASE_DOMAIN: str = 'patagoniansys.com',
   """
-  Patagonian Domain.
+  Base company domain.
   """
 
   DRIVE_FOLDER_OWNER: str = f'patagonian.drive@patagoniansys.com',
   """
-  Patagonian folders Owner
-  All folders will be owned by following user
+  Company folders Owner.
+
+  All folders will be owned by this user by default
   if an Owner was not defined.
   """
 
   EMAIL_BASE_CLEAN_REGEX: str = '(sys)?\.(com|it)$'
   """
   At Patagonian we have domains "@patagoniansys.com", "@patagonian.it" and "@patagonian.com".
-  to check if a user is already on the permissions list, we need to examine
+  To check if a user is already on the permissions list, we need to examine
   the first part of their email address.
   To do this, we'll use a RegExp to strip away ani variations in the email address and
   only keep the beginning part of the address.
@@ -22,6 +23,9 @@ class _Settings():
 
 
 SETTINGS = _Settings()
+"""
+Settings.
+"""
 
 
 def setup(
@@ -29,6 +33,10 @@ def setup(
     drive_folder_owner: str = None,
     email_base_clean_regex = None
   ):
+  """
+  Initialize settings.
+  """
+  
   if base_domain != None:
     SETTINGS.BASE_DOMAIN = base_domain
 

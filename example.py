@@ -49,7 +49,7 @@ _ADMIN_USER = mod_cfs.validate_email('_ADMIN_USER', _ADMIN_USER, False)
 
 GOOGLE_GROUPS = {
   'info': f'info@patagoniansys.com',
-  'developer': f'eduardo.cuomo@patagoniansys.com'
+  'developer': f'info@patagoniansys.com'
 }
 
 # Connect to specific folder using its ID

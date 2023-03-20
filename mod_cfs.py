@@ -4,16 +4,15 @@ from src.validations import *
 from src.bootstrap import *
 from src.utils import *
 
-log_title('Utilities')
-
 def remove_permissions(
     folder_id: str,
     user_email: str
   ):
-  """Remove access from folder
+  """
+  Remove access from folder.
 
   Args:
-    folder_id: Folder ID
+    folder_id:  Google Drive folder ID
     user_email: User e-Mail | Domain | *
   """
   if user_email:
@@ -83,6 +82,13 @@ def remove_permissions(
 
 
 def add_permissions(folder_id: str, permission):
+  """
+  Add access from folder.
+
+  Args:
+    folder_id:  Google Drive folder ID
+    permission: Permission config
+  """
   if permission:
     is_owner = permission.get('role', None) == 'owner'
     role = permission.get('role', 'R?')
@@ -111,14 +117,15 @@ def create_folder(
     permissions = None,
     remove_emails = None
   ):
-  """Create folder.
+  """
+  Create folder.
 
   Args:
-    name: Folder name
-    permissions: Array of permissions
+    name:          Folder name
+    permissions:   Array of permissions
     remove_emails: Array of e-Mail addresses
 
-  Returns: created folder ID.
+  Returns: Created folder ID
   """
   log_start(f'Creating folder "{name}" at {parent_folder_id}...')
 
@@ -175,6 +182,15 @@ def get_folder_id(
     parent_folder_id: str,
     folder_name: str
   ):
+  """
+  Get folder ID from given parent folder ID and folder name.
+  
+  Args:
+    parent_folder_id: Parent folder ID
+    folder_name:      Folder name
+    
+  Returns: Folder ID
+  """
   parent_folder_content = list_folder(parent_folder_id)
   folder_id = ''
 
@@ -192,6 +208,17 @@ def create_folder_if_not_exists(
     permissions = None,
     remove_emails = None
   ):
+  """
+  Create folder if not exists.
+
+  Args:
+    parent_folder_id: Parent folder ID
+    folder_name:      Folder name
+    permissions:      Array of permissions
+    remove_emails:    Array of e-Mail addresses
+
+  Returns: Created folder ID
+  """
   client_folder_id = get_folder_id(parent_folder_id, folder_name)
 
   if client_folder_id:
@@ -210,6 +237,14 @@ def create_folder_if_not_exists(
 
 
 def list_folder(folder_id: str):
+  """
+  List folder content.
+
+  Args:
+    folder_id: Google Drive folder ID
+
+  Returns: Folder content array
+  """
   files = []
   page_token = None
 
@@ -231,12 +266,15 @@ def list_folder(folder_id: str):
 
 
 def build_p(p_type: str, email: str, role: str):
-  """Build permissions object.
+  """
+  Build permissions object.
 
   Args:
     p_type: user | group | domain | anyone
     email: e-Mail.
     role: owner | organizer | fileOrganizer | writer | commenter | reader
+
+  Returns: Permissions object
 
   See: https://developers.google.com/drive/api/v3/reference/permissions
   """
@@ -252,22 +290,26 @@ def build_p(p_type: str, email: str, role: str):
 
 def user_p(user_email: str, role: str = 'writer'):
   """
-  User permissions object.
+  Build user permissions object.
 
   Args:
     user_email: e-Mail.
     role: owner | organizer | fileOrganizer | writer | commenter | reader
+
+  Returns: Permissions object.
   """
   return build_p('user', user_email, role)
 
 
 def group_p(group_email: str, role: str = 'writer'):
   """
-  Group permissions object.
+  Build group permissions object.
 
   Args:
     group_email: e-Mail.
     role: owner | organizer | fileOrganizer | writer | commenter | reader
+
+  Returns: Permissions object.
   """
   return build_p('group', group_email, role)
 
@@ -278,6 +320,8 @@ def domain_p(role: str = 'reader'):
 
   Args:
     role: owner | organizer | fileOrganizer | writer | commenter | reader
+
+  Returns: Permissions object.
   """
   return {
       'type': 'domain',
@@ -287,6 +331,15 @@ def domain_p(role: str = 'reader'):
 
 
 def create_folder_tree(parent_folder_id, folder_tree):
+  """
+  Create folder tree.
+  
+  Args:
+    parent_folder_id: Parent folder ID
+    folder_tree:      Folder tree definition
+    
+  Returns: Created folder ID
+  """
   root_folder_id = ''
 
   for folder_name, data in folder_tree.items():
