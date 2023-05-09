@@ -31,8 +31,8 @@ def validate_email(
     raise Exception(f'"{name}" can not be empty!')
 
   if s and not s.endswith(f'@{SETTINGS.BASE_DOMAIN}'):
-    if required and s.starswith(f'@{SETTINGS.BASE_DOMAIN}'):
-      raise Exception(f'"{name}" should be a valid e-Mail!')
+    if required and s.startsswith(f'@{SETTINGS.BASE_DOMAIN}'):
+      raise Exception(f'"{name}" should be a valid e-Mail (@{SETTINGS.BASE_DOMAIN})!')
     else:
       s = ""
 
